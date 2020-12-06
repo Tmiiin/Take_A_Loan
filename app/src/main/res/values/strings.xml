@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Take A Loan!</string>
+    <string name="registration">Зарегистрироваться</string>
+    <string name="login">Войти</string>
+</resources>
