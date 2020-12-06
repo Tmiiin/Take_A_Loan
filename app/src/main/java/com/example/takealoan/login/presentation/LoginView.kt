@@ -8,10 +8,7 @@ interface LoginView {
 
     fun hideLoading()
 
-    fun showUsernamePasswordError()
-
-    fun showAuthError()
-
-    fun showUnacceptableNamePassword()
     fun registrationSuccess()
+    fun loginSuccess(token: String)
+    fun showToastError(error: String)
 }

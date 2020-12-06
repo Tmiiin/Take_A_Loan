@@ -3,7 +3,6 @@ package com.example.takealoan.login.data.network
 import com.example.takealoan.login.data.model.PostRegistrationModel
 import com.example.takealoan.login.data.model.UserModel
 import io.reactivex.Single
-import okhttp3.RequestBody
 import retrofit2.http.*
 
 interface LoginAPI {

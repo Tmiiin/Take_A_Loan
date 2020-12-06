@@ -1,6 +1,7 @@
 package com.example.takealoan.login.presentation
 
 import android.util.Log
+import com.example.takealoan.Constants
 import com.example.takealoan.login.data.model.PostRegistrationModel
 import com.example.takealoan.login.domain.LoginUseCase
 import com.example.takealoan.login.domain.RegistrationUseCase
@@ -31,7 +32,7 @@ class LoginPresenterImpl(
                     { error -> doOnError(error) })
         } catch (e: Exception) {
             Log.e(TAG, e.message.toString())
-            view?.showAuthError()
+            view?.showToastError(Constants.error2)
         }
     }
 
@@ -57,18 +58,18 @@ class LoginPresenterImpl(
                         { error -> doOnError(error) })
             } catch (e: Exception) {
                 Log.e(TAG, e.message.toString())
-                view?.showAuthError()
+                view?.showToastError(Constants.error2)
             }
     }
 
     private fun doOnError(e: Throwable) {
         Log.e(TAG, e.message.toString())
-        view?.showUsernamePasswordError()
+        view?.showToastError(Constants.error3)
     }
 
     private fun handleLoginResponse(msg: String) {
-        Log.i(TAG, msg + " токен такой-то")
-        view?.showUserCreated()
+        Log.i(TAG, "token is: $msg")
+        view?.loginSuccess(msg)
     }
 
     override fun onDestroy(){
