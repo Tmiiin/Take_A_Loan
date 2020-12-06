@@ -1,25 +1,43 @@
 package com.example.takealoan.login.ui
 
+import android.content.Intent
 import android.graphics.Paint
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import com.example.takealoan.Constants
 import com.example.takealoan.R
+import com.example.takealoan.loanscreen.ui.LoanView
+import com.example.takealoan.Preferences
 import com.example.takealoan.login.di.LoginPresenterFactory
 import com.example.takealoan.login.presentation.LoginPresenter
 import com.example.takealoan.login.presentation.LoginView
 import kotlinx.android.synthetic.main.activity_login.*
 
+
 class MainActivity : AppCompatActivity(), LoginView {
 
     private var presenter: LoginPresenter? = null
+    val TAG = "LoginView"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         initPresenter()
         goOnLoginView()
+    }
+
+    override fun loginSuccess(token: String) {
+        Preferences(this).setToken(token)
+        Log.i(TAG, "Token is: $token")
+        Toast.makeText(
+            applicationContext, "Enter success!",
+            Toast.LENGTH_LONG
+        ).show()
+        val intent = Intent(this@MainActivity, LoanView::class.java)
+        startActivity(intent)
     }
 
     private fun initPresenter() {
@@ -36,7 +54,7 @@ class MainActivity : AppCompatActivity(), LoginView {
             hideLoading()
         } else {
             hideLoading()
-            showUnacceptableNamePassword()
+            showToastError(Constants.error1)
         }
     }
 
@@ -61,29 +79,15 @@ class MainActivity : AppCompatActivity(), LoginView {
             hideLoading()
         } else {
             hideLoading()
-            showUnacceptableNamePassword()
+            showToastError(Constants.error1)
         }
         password.text.clear()
         username.text.clear()
     }
 
-    override fun showUsernamePasswordError() {
+    override fun showToastError(error: String) {
         Toast.makeText(
-            applicationContext, "error in username or password",
-            Toast.LENGTH_LONG
-        ).show()
-    }
-
-    override fun showAuthError() {
-        Toast.makeText(
-            applicationContext, "error in authorization",
-            Toast.LENGTH_LONG
-        ).show()
-    }
-
-    override fun showUnacceptableNamePassword() {
-        Toast.makeText(
-            applicationContext, "Unacceptable password or username",
+            applicationContext, error,
             Toast.LENGTH_LONG
         ).show()
     }
@@ -93,6 +97,7 @@ class MainActivity : AppCompatActivity(), LoginView {
             applicationContext, "Registration success!",
             Toast.LENGTH_LONG
         ).show()
+        goOnLoginView()
     }
 
     private fun goOnRegistrationView() {
@@ -121,4 +126,5 @@ class MainActivity : AppCompatActivity(), LoginView {
         presenter?.onDestroy()
         super.onDestroy()
     }
+
 }

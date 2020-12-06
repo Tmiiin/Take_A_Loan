@@ -1,4 +1,4 @@
-package com.example.takealoan.login
+package com.example.takealoan
 
 import android.content.Context
 import android.content.SharedPreferences
