@@ -17,7 +17,7 @@ interface LoanAPI {
 
     @Headers("Content-Type: application/json")
     @GET("loans/{id}")
-    fun createLoan(
+    fun getLoanData(
         @Header("Authorization") token: String,
         @Path("id") loanId: Int
     ): Single<PostLoanModel>

@@ -2,4 +2,13 @@
     <string name="app_name">Take A Loan!</string>
     <string name="registration">Зарегистрироваться</string>
     <string name="login">Войти</string>
+    <string name="percent">Процент:</string>
+    <string name="get_back">Отдаете:</string>
+    <string name="equal">=</string>
+    <string name="plus">+</string>
+    <string name="borrow">Занимаете:</string>
+    <string name="borrow_hint">Итоговый процент по займу: %xx%, итоговый период взятия займа: %yy месяцев</string>
+    <string name="max_amount">Максимальная сумма:</string>
+    <string name="loan_amount">Размер займа:</string>
+    <string name="valute"> Руб.</string>
 </resources>

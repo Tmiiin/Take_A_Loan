@@ -1,14 +1,12 @@
-package com.example.takealoan.login.presentation
+package com.example.takealoan.login.presentation.interfaces
 
-interface LoginPresenter {
+import com.example.takealoan.login.ui.interfaces.LoginView
 
-    fun attachView(view: LoginView)
-
-    fun onRegistrationButtonClick(username: String, password: String)
-
+interface LoginPresenter{
     fun onDestroy()
-
     fun onLoginButtonClick(username: String, password: String)
     fun isUsernameValid(username: String): Boolean
     fun isPasswordValid(password: String): Boolean
+
+    fun attachView(view: LoginView)
 }
