@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.takealoan.R
 import com.example.takealoan.loanscreen.data.model.PostLoanModel
+import com.example.takealoan.loanscreen.ui.LoanStatus
 import java.text.SimpleDateFormat
 
 class LoanAdapter(
@@ -49,12 +50,14 @@ class LoanAdapter(
 
         fun bind(loan: PostLoanModel) {
             val name = loan.firstName + " " + loan.lastName
-            if(loan.state == "REGISTERED")
-                icon.setImageResource(R.drawable.baseline_schedule_black_18dp)
-            else if(loan.state == "APPROVED")
-                icon.setImageResource(R.drawable.baseline_check_circle_outline_black_18dp)
-            else if(loan.state == "REJECTED")
-                icon.setImageResource(R.drawable.baseline_highlight_off_black_18dp)
+            when(loan.state) {
+                LoanStatus.REGISTERED.toString() ->
+                    icon.setImageResource(R.drawable.baseline_schedule_black_18dp)
+                LoanStatus.REJECTED.toString() ->
+                    icon.setImageResource(R.drawable.baseline_highlight_off_black_18dp)
+                LoanStatus.APPROVED.toString() ->
+                    icon.setImageResource(R.drawable.baseline_check_circle_outline_black_18dp)
+            }
             loanBorrower.text = name
             val parser = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
             val formatter = SimpleDateFormat("dd.MM.yyyy HH:mm")

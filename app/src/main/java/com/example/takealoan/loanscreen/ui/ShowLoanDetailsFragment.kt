@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.takealoan.R
 import com.example.takealoan.loanscreen.data.model.PostLoanModel
@@ -12,6 +13,9 @@ import com.example.takealoan.loanscreen.di.LoanDetailsFactory
 import com.example.takealoan.loanscreen.presentation.interfaces.LoanDetailsPresenter
 import com.example.takealoan.loanscreen.presentation.interfaces.LoanDetailsView
 import kotlinx.android.synthetic.main.loan_details.*
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.LocalDateTime
 
 class ShowLoanDetailsFragment: Fragment(), LoanDetailsView {
 
@@ -39,12 +43,32 @@ class ShowLoanDetailsFragment: Fragment(), LoanDetailsView {
 
     override fun setFieldsOfLoan(loanModel: PostLoanModel){
         val name: String = "${loanModel.lastName} ${loanModel.firstName}"
-        status.text = "Заявка одобрена!))"
-        imageView.setImageResource(R.drawable.baseline_schedule_black_18dp)
-        linear_layout.setBackgroundColor(Color.RED);
+        when(loanModel.state){
+            LoanStatus.APPROVED.toString() -> {
+                imageView.setImageResource(R.drawable.baseline_check_circle_outline_black_18dp)
+                val color = context?.let { ContextCompat.getColor(it, R.color.design_default_color_surface) }
+                color?.let { linear_layout.setBackgroundColor(it) }
+                status.text = LoanStatus.APPROVED.text()
+            }
+            LoanStatus.REGISTERED.toString() ->{
+                imageView.setImageResource(R.drawable.baseline_schedule_black_18dp)
+                val color = context?.let { ContextCompat.getColor(it, R.color.purple_500) }
+                color?.let { linear_layout.setBackgroundColor(it) };
+                status.text = LoanStatus.REGISTERED.text()
+            }
+            LoanStatus.REJECTED.toString() ->{
+                imageView.setImageResource(R.drawable.baseline_highlight_off_black_18dp)
+                val color = context?.let { ContextCompat.getColor(it, R.color.def_wheel_color) }
+                color?.let { linear_layout.setBackgroundColor(it) };
+                status.text = LoanStatus.REJECTED.text()
+            }
+        }
         customer_name.text = name
-        loan_get_date.text = loanModel.date
-        loan_end_date.text = loanModel.date + "пока не посчитали"
+        val parser = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+        val formatter = SimpleDateFormat("dd.MM.yyyy HH:mm")
+       val formattedDate: String = formatter.format(parser.parse(loanModel.date.split(".").first()))
+        loan_get_date.text = formattedDate
+        loan_end_date.text = formattedDate + "пока не посчитали"
         amount.text = loanModel.amount.toString()
     }
 
