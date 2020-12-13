@@ -1,14 +1,27 @@
 <resources>
     <string name="app_name">Take A Loan!</string>
-    <string name="registration">Зарегистрироваться</string>
     <string name="login">Войти</string>
-    <string name="percent">Процент:</string>
-    <string name="get_back">Отдаете:</string>
+    <string name="percent">Процент/руб.</string>
+    <string name="get_back">Отдаете/руб.</string>
     <string name="equal">=</string>
     <string name="plus">+</string>
-    <string name="borrow">Занимаете:</string>
+    <string name="borrow">Занимаете/руб.</string>
     <string name="borrow_hint">Итоговый процент по займу: %xx%, итоговый период взятия займа: %yy месяцев</string>
-    <string name="max_amount">Максимальная сумма:</string>
-    <string name="loan_amount">Размер займа:</string>
-    <string name="valute"> Руб.</string>
+    <string name="max_amount">Максимальная сумма</string>
+    <string name="loan_amount">Размер займа/руб.</string>
+    <string name="data_for_enter">Введите свои данные для будущего входа:</string>
+    <string name="username">username</string>
+    <string name="password">password</string>
+    <string name="registered">Зарегистрироваться</string>
+    <string name="enter">войти</string>
+    <string name="fab_desc">Кнопка для оформления займа</string>
+    <string name="loan_information">Информация по заявке:</string>
+    <string name="borowwer">Получатель займа:</string>
+    <string name="loan_date">Дата оформления заявки:</string>
+    <string name="loan_date_end">Конец периода выплат:</string>
+    <string name="amount">Сумма займа:</string>
+    <string name="name">Имя:</string>
+    <string name="lastname">Фамилия:</string>
+    <string name="number">Номер телефона:</string>
+    <string name="get_a_loan">Оформить займ</string>
 </resources>

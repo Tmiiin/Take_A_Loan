@@ -13,7 +13,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="16dp"
-            android:text="Введите свои данные для будущего входа:" />
+            android:text="@string/data_for_enter" />
 
         <EditText
             android:id="@+id/username"
@@ -21,7 +21,7 @@
             android:layout_height="45dp"
             android:layout_gravity="center"
             android:layout_margin="16dp"
-            android:hint="username" />
+            android:hint="@string/username" />
 
         <EditText
             android:id="@+id/password"
@@ -30,7 +30,7 @@
             android:layout_gravity="center"
             android:layout_margin="16dp"
             android:layout_marginTop="-16dp"
-            android:hint="password"
+            android:hint="@string/password"
             android:inputType="textPassword" />
 
         <ProgressBar
@@ -39,7 +39,6 @@
             android:layout_height="48dp"
             android:layout_gravity="center"
             android:layout_marginStart="180dp"
-            android:layout_marginLeft="180dp"
             android:layout_marginTop="480dp"
             android:visibility="gone" />
 
@@ -49,7 +48,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="24dp"
-            android:text="войти" />
+            android:text="@string/enter" />
 
         <TextView
             android:id="@+id/registration"
@@ -57,6 +56,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="8dp"
-            android:text="Зарегистрироваться" />
+            android:text="@string/registered" />
     </LinearLayout>
 </layout>

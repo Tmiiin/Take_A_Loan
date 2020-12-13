@@ -1,6 +1,5 @@
 package com.example.takealoan.loanscreen.presentation.adapter
 
-import android.app.PendingIntent.getActivity
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.takealoan.R
 import com.example.takealoan.loanscreen.data.model.PostLoanModel
-import com.example.takealoan.loanscreen.ui.LoanStatus
+import com.example.takealoan.loanscreen.data.model.LoanStatus
 import java.text.SimpleDateFormat
 
 class LoanAdapter(
@@ -40,17 +39,18 @@ class LoanAdapter(
     class LoanViewHolder(view: View, private val mOnLoanListener: OnLoanListener) :
         RecyclerView.ViewHolder(view), View.OnClickListener {
 
-        init{
+        init {
             view.setOnClickListener(this)
         }
+
         var loanBorrower: TextView = view.findViewById(R.id.loan_borrower)
         var dateOfLoan: TextView = view.findViewById(R.id.date_of_loan)
-        val icon: ImageView  = view.findViewById(R.id.icon)
+        val icon: ImageView = view.findViewById(R.id.icon)
         val amount: TextView = view.findViewById(R.id.amount)
 
         fun bind(loan: PostLoanModel) {
             val name = loan.firstName + " " + loan.lastName
-            when(loan.state) {
+            when (loan.state) {
                 LoanStatus.REGISTERED.toString() ->
                     icon.setImageResource(R.drawable.baseline_schedule_black_18dp)
                 LoanStatus.REJECTED.toString() ->
@@ -63,8 +63,7 @@ class LoanAdapter(
             val formatter = SimpleDateFormat("dd.MM.yyyy HH:mm")
             val formattedDate: String = formatter.format(parser.parse(loan.date.split(".").first()))
             dateOfLoan.text = formattedDate
-            val amounttext =/* getString(R.string.loan_amount) +*/ loan.amount.toString()
-            amount.text = amounttext
+            amount.text = loan.amount.toString()
         }
 
         override fun onClick(p0: View?) {
@@ -72,7 +71,8 @@ class LoanAdapter(
         }
 
     }
-    interface OnLoanListener{
+
+    interface OnLoanListener {
         fun onLoanClick(v: View?, position: Int)
     }
 }

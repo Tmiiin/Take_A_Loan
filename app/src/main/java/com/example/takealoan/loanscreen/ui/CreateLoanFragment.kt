@@ -41,6 +41,7 @@ class CreateLoanFragment : Fragment(),
 
     fun setFields(curValue: Int) {
         amount.text = curValue.toString()
+        amount2.text = curValue.toString()
         val percentOfLoan = amount.text.toString().toFloat() * conditionsModel.percent / 100f
         loan_cost.text = (amount.text.toString().toInt() +
                 percentOfLoan).toInt().toString()
