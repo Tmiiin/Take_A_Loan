@@ -82,7 +82,7 @@ class ShowLoanDetailsFragment : Fragment(), LoanDetailsView {
         val formattedDate = reformatDate(loanModel.date)
         loan_get_date.text = formattedDate
         val loanEndDate =
-            "${getLastDate(loanModel.date, loanModel.period)} + ${formattedDate.split(" ")[1]}"
+            "${getLastDate(loanModel.date, loanModel.period)} ${formattedDate.split(" ")[1]}"
         loan_end_date.text = loanEndDate
         amount.text = loanModel.amount.toString()
     }
