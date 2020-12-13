@@ -1,6 +1,7 @@
 package com.example.takealoan.loanscreen.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,6 +18,7 @@ import java.time.LocalDate
 
 class ShowLoanDetailsFragment : Fragment(), LoanDetailsView {
 
+    val TAG = "DetailsFragment"
     private var presenter: LoanDetailsPresenter? = null
     var itemId: Int = 0
 
@@ -79,21 +81,28 @@ class ShowLoanDetailsFragment : Fragment(), LoanDetailsView {
         customer_name.text = name
         val formattedDate = reformatDate(loanModel.date)
         loan_get_date.text = formattedDate
-        loan_end_date.text = getLastDate(formattedDate, loanModel.period)
+        val loanEndDate =
+            "${getLastDate(loanModel.date, loanModel.period)} + ${formattedDate.split(" ")[1]}"
+        loan_end_date.text = loanEndDate
         amount.text = loanModel.amount.toString()
     }
 
+    //форматируем дату до приемлемого формата
     private fun reformatDate(date: String): String {
         val parser = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
         val formatter = SimpleDateFormat("dd.MM.yyyy HH:mm")
         return formatter.format(parser.parse(date.split(".").first()))
     }
 
+    //получаем срок, в который нужно отдать кредит
     private fun getLastDate(date: String, month: Int): String {
         return if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            val q: LocalDate = LocalDate.parse(date)
-            q.plusMonths(month.toLong())
-            q.toString()
+            var localDate: LocalDate = LocalDate.parse(date.split("T").first())
+            localDate = localDate.plusMonths(month.toLong())
+            val formatter = SimpleDateFormat("dd.MM.yyyy")
+            val parser = SimpleDateFormat("yyyy-MM-dd")
+            Log.i(TAG, localDate.toString())
+            formatter.format(parser.parse(localDate.toString()))
         } else {
             "??"
         }
