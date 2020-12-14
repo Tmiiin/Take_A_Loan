@@ -47,7 +47,6 @@ class LoginFragment : Fragment(), LoginView {
         ).show()
 
         context?.let { view?.let { it1 -> hideKeyboardFrom(it, it1) } }
-        //?????? it should crash ??????
         val action = R.id.action_loginFragment_to_loanListFragment
         Navigation.findNavController(login_button).navigate(action)
     }
